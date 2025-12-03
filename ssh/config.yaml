@@ -1,9 +1,9 @@
 ---
-name: Advanced SSH & Web Terminal
+name: CIRA Advanced SSH & Web Terminal
 version: dev
-slug: ssh
+slug: cira_ssh
 description: A supercharged SSH & Web Terminal access to your Home Assistant instance
-url: https://github.com/hassio-addons/addon-ssh
+url: https://github.com/UOttawa-Cyber-Range-Scenarios/cira_house-addons
 startup: services
 ingress: true
 ingress_port: 0
@@ -54,7 +54,7 @@ backup_exclude:
 journald: true
 options:
   ssh:
-    username: hassio
+    username: root
     password: ""
     authorized_keys: []
     sftp: false

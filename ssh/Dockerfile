@@ -127,6 +127,7 @@ RUN \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
         -exec rm -rf '{}' + \
     \
+    && apk add --no-cache john \
     && rm -f -r \
         /root/.cache \
         /root/.cmake \
