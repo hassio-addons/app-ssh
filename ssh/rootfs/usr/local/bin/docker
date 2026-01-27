@@ -21,3 +21,5 @@ bashio::log.yellow "including complete destruction of your system."
 bashio::log.yellow "Please, be sure you know what you are doing before enabling"
 bashio::log.yellow "this feature!"
 bashio::log.yellow ""
+
+bashio::exit.nok
