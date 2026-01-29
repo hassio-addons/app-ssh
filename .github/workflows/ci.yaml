@@ -3,7 +3,6 @@ name: CI
 
 # yamllint disable-line rule:truthy
 on:
-  push:
   pull_request:
     types:
       - opened
@@ -19,4 +18,4 @@ permissions:
 
 jobs:
   workflows:
-    uses: hassio-addons/workflows/.github/workflows/app-ci.yaml@a3f73d2d5d316dee985ff513352c0894f584ea90 # v2.0.1
+    uses: hassio-addons/workflows/.github/workflows/app-ci.yaml@79396bd74c5e6368a29a9ca59926c1eb38e06349 # v2.0.2
