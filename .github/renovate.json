@@ -29,20 +29,13 @@
     {
       "customType": "regex",
       "managerFilePatterns": ["//Dockerfile$/"],
-      "matchStrings": ["ARG TTYD_VERSION=[\"']?(?<currentValue>.+?)[\"']?\\s+"],
-      "datasourceTemplate": "github-tags",
-      "depNameTemplate": "tsl0922/ttyd"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["//Dockerfile$/"],
       "matchStringsStrategy": "any",
       "matchStrings": [
         "\\s\\s(?<package>[a-z0-9][a-z0-9-_]+)=(?<currentValue>[a-z0-9-_.]+)\\s+"
       ],
       "versioningTemplate": "loose",
       "datasourceTemplate": "repology",
-      "depNameTemplate": "alpine_3_22/{{package}}"
+      "depNameTemplate": "alpine_3_23/{{package}}"
     }
   ],
   "packageRules": [

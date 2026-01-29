@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:19.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:20.0.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -14,65 +14,66 @@ COPY requirements.txt /tmp/
 # Setup base
 ARG BUILD_ARCH=amd64
 ARG HA_CLI_VERSION="4.44.0"
-ARG TTYD_VERSION="1.7.7"
+
 # hadolint ignore=DL3003,DL3042
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         bsd-compat-headers=0.7.2-r6 \
         build-base=0.5-r3 \
-        cmake=3.31.7-r1 \
-        docker=28.3.3-r4 \
+        cmake=4.1.3-r0 \
+        docker=29.1.3-r1 \
         json-c-dev=0.18-r1 \
-        libffi-dev=3.4.8-r0 \
+        libffi-dev=3.5.2-r0 \
         libuv-dev=1.51.0-r0 \
-        openssl-dev=3.5.4-r0 \
+        openssl-dev=3.5.5-r0 \
         python3-dev=3.12.12-r0 \
         zlib-dev=1.3.1-r2 \
     \
     && apk add --no-cache \
         ack=3.9.0-r0 \
-        alsa-plugins-pulse=1.2.12-r0 \
-        alsa-utils=1.2.14-r0 \
+        alsa-plugins-pulse=1.2.12-r2 \
+        alsa-utils=1.2.14-r4 \
         awake=1.0-r12 \
-        bash-completion=2.16.0-r0 \
-        bind-tools=9.20.16-r0 \
-        bluez=5.82-r0 \
+        bash-completion=2.17.0-r1 \
+        bind-tools=9.20.18-r0 \
+        bluez=5.85-r0 \
         colordiff=1.0.21-r0 \
-        docker-bash-completion=28.3.3-r4 \
-        docker-zsh-completion=28.3.3-r4 \
+        docker-bash-completion=29.1.3-r1 \
+        docker-zsh-completion=29.1.3-r1 \
         gcompat=1.1.0-r4 \
-        git=2.49.1-r0 \
-        htop=3.4.1-r0 \
+        git=2.52.0-r0 \
+        htop=3.4.1-r1 \
         json-c=0.18-r1 \
-        libltdl=2.5.4-r1 \
-        libstdc++=14.2.0-r6 \
+        libltdl=2.5.4-r2 \
+        libstdc++=15.2.0-r2 \
         libuv=1.51.0-r0 \
         libxml2-utils=2.13.9-r0 \
-        mariadb-client=11.4.8-r0 \
-        mosh=1.4.0-r14 \
-        mosquitto-clients=2.0.21-r0 \
-        nano-syntax=8.4-r0 \
-        nano=8.4-r0 \
-        ncurses=6.5_p20250503-r0 \
+        mariadb-client=11.4.9-r0 \
+        mosh=1.4.0-r18 \
+        mosquitto-clients=2.0.22-r0 \
+        nano-syntax=8.7-r0 \
+        nano=8.7-r0 \
+        ncurses=6.5_p20251123-r0 \
         net-tools=2.10-r3 \
         nmap=7.97-r0 \
-        openssh=10.0_p1-r10 \
-        openssl=3.5.4-r0 \
-        procps-ng=4.0.4-r3 \
+        openssh=10.2_p1-r0 \
+        openssl=3.5.5-r0 \
+        procps-ng=4.0.5-r0 \
         pwgen=2.08-r3 \
         pulseaudio-utils=17.0-r5 \
-        py3-pip=25.1.1-r0 \
+        py3-pip=25.1.1-r1 \
         python3=3.12.12-r0 \
         rsync=3.4.1-r1 \
-        sqlite=3.49.2-r1 \
+        sqlite=3.51.2-r0 \
         sudo=1.9.17_p2-r0 \
-        tmux=3.5a-r1 \
-        vim=9.1.1566-r0 \
-        wget=1.25.0-r1 \
+        tmux=3.6-r0 \
+        ttyd=1.7.7-r0 \
+        vim=9.1.1942-r0 \
+        wget=1.25.0-r2 \
         zip=3.0-r13 \
         zsh-autosuggestions=0.7.1-r0 \
         zsh-syntax-highlighting=0.8.0-r1 \
-        zsh=5.9-r5 \
+        zsh=5.9-r6 \
     \
     && git clone --depth 1 \
         https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
@@ -84,37 +85,6 @@ RUN \
     && ha completion bash > /usr/share/bash-completion/completions/ha \
     \
     && sed -i -e "s#bin/sh#bin/zsh#" /etc/passwd \
-    \
-    && git clone --branch "v4.3.3" --depth=1 \
-        https://github.com/warmcat/libwebsockets.git /tmp/libwebsockets \
-    \
-    && mkdir -p /tmp/libwebsockets/build \
-    && cd /tmp/libwebsockets/build \
-    && cmake .. \
-        -DCMAKE_BUILD_TYPE=MinSizeRel \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-        -DLWS_IPV6=ON \
-        -DLWS_STATIC_PIC=ON \
-        -DLWS_UNIX_SOCK=OFF \
-        -DLWS_WITH_LIBUV=ON \
-        -DLWS_WITH_SHARED=ON \
-        -DLWS_WITHOUT_TESTAPPS=ON \
-    && make \
-    && make install \
-    \
-    && git clone --branch main --single-branch \
-        https://github.com/tsl0922/ttyd.git /tmp/ttyd \
-    && git -C /tmp/ttyd checkout "${TTYD_VERSION}" \
-    \
-    && mkdir -p /tmp/ttyd/build \
-    && cd /tmp/ttyd/build \
-    && cmake .. \
-        -DCMAKE_BUILD_TYPE=MinSizeRel \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-    && make \
-    && make install \
     \
     && cp /usr/bin/docker /usr/local/bin/.undocked \
     \
