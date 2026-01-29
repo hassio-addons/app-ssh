@@ -18,4 +18,4 @@ permissions:
 
 jobs:
   workflows:
-    uses: hassio-addons/workflows/.github/workflows/app-ci.yaml@79396bd74c5e6368a29a9ca59926c1eb38e06349 # v2.0.2
+    uses: hassio-addons/workflows/.github/workflows/app-ci.yaml@029301a2e990f6c1d430cad7cd1726970b2ca9d6 # v2.0.3
