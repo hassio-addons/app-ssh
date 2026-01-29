@@ -138,7 +138,7 @@ order to be able to enable the SFTP capabilities._
 #### Option `ssh`: `password`
 
 Sets the password to log in with. Leaving it empty disables authenticating with
-a password. Using Public Key authentication instead of password authentication
+a password. Using public key authentication instead of password authentication
 is highly recommended from a security point of view.
 
 #### Option `ssh` `authorized_keys`
