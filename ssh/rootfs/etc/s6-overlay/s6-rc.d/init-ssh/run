@@ -1,7 +1,7 @@
 #!/command/with-contenv bashio
 # shellcheck shell=bash
 # ==============================================================================
-# Home Assistant Community Add-on: Advanced SSH & Web Terminal
+# Home Assistant Community App: Advanced SSH & Web Terminal
 # Configures the SSH daemon
 # ==============================================================================
 readonly SSH_AUTHORIZED_KEYS_PATH=/etc/ssh/authorized_keys
@@ -41,14 +41,14 @@ if bashio::config.is_empty 'ssh.authorized_keys' \
     && bashio::config.is_empty 'ssh.password';
 then
     bashio::log.fatal
-    bashio::log.fatal 'Configuration of this add-on is incomplete.'
+    bashio::log.fatal 'Configuration of this app is incomplete.'
     bashio::log.fatal
     bashio::log.fatal 'Please be sure to set at least an SSH password'
     bashio::log.fatal 'or at least one authorized key!'
     bashio::log.fatal
     bashio::log.fatal 'You can configure this using the "ssh.password"'
     bashio::log.fatal 'or the "ssh.authorized_keys" option in the'
-    bashio::log.fatal 'add-on configuration.'
+    bashio::log.fatal 'app configuration.'
     bashio::log.fatal
     bashio::exit.nok
 fi
@@ -58,7 +58,7 @@ if bashio::config.true 'ssh.sftp' \
     && ! bashio::config.equals 'ssh.username' 'root';
 then
     bashio::log.fatal
-    bashio::log.fatal 'You have enabled SFTP using the "ssh.sftp" add-on'
+    bashio::log.fatal 'You have enabled SFTP using the "ssh.sftp" app'
     bashio::log.fatal 'option. Unfortunately, this requires "ssh.username"'
     bashio::log.fatal 'to be "root".'
     bashio::log.fatal

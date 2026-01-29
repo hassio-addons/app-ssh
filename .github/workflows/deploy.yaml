@@ -6,14 +6,13 @@ on:
   release:
     types:
       - published
-  workflow_run:
-    workflows: ["CI"]
-    branches: [main]
-    types:
-      - completed
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   workflows:
-    uses: hassio-addons/workflows/.github/workflows/addon-deploy.yaml@main
+    uses: hassio-addons/workflows/.github/workflows/app-deploy.yaml@a3f73d2d5d316dee985ff513352c0894f584ea90 # v2.0.1
     secrets:
       DISPATCH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
