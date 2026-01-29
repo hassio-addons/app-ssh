@@ -108,8 +108,15 @@ fi
 
 # Executes user configured/requested commands on startup
 if bashio::config.has_value 'init_commands'; then
-    while read -r cmd; do
+    # Use bashio::config to properly iterate over the array, preserving multi-line commands
+    length=$(bashio::config 'init_commands | length') \
+        || bashio::exit.nok 'Failed to get init_commands array length'
+    
+    for (( i=0; i<length; i++ )); do
+        cmd=$(bashio::config "init_commands[${i}]") \
+            || bashio::exit.nok "Failed to get init command at index ${i}"
+        
         eval "${cmd}" \
             || bashio::exit.nok "Failed executing init command: ${cmd}"
-    done <<< "$(bashio::config 'init_commands')"
+    done
 fi
