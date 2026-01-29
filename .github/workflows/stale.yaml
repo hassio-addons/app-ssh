@@ -7,6 +7,10 @@ on:
     - cron: "0 8 * * *"
   workflow_dispatch:
 
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   workflows:
-    uses: hassio-addons/workflows/.github/workflows/stale.yaml@main
+    uses: hassio-addons/workflows/.github/workflows/stale.yaml@a3f73d2d5d316dee985ff513352c0894f584ea90 # v2.0.1
