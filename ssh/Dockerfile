@@ -68,7 +68,7 @@ RUN \
         sudo=1.9.17_p2-r0 \
         tmux=3.6-r0 \
         ttyd=1.7.7-r0 \
-        vim=9.1.1942-r0 \
+        vim=9.1.2132-r0 \
         wget=1.25.0-r2 \
         zip=3.0-r13 \
         zsh-autosuggestions=0.7.1-r0 \
