@@ -25,7 +25,7 @@ This fork includes **Claude Code**, an AI-powered coding assistant that can
 help you optimize your Home Assistant configuration, write automations,
 and troubleshoot issues directly from the terminal.
 
-Based on the [Advanced SSH & Web Terminal add-on][upstream] by the
+Based on the [Advanced SSH & Web Terminal app][upstream] by the
 Home Assistant Community app project.
 
 [:books: Read the full app documentation][docs]
@@ -80,11 +80,11 @@ well. Additionally, it comes out of the box with the following:
 
 ## Installation
 
-This add-on is not part of the official Home Assistant add-on repository.
+This app is not part of the official Home Assistant app repository.
 To install it, you need to add this repository as a custom repository:
 
 1. Open your Home Assistant instance
-2. Navigate to **Settings** → **Add-ons** → **Add-on Store**
+2. Navigate to **Settings** → **Apps** → **Install App**
 3. Click the menu (three dots) in the top right corner
 4. Select **Repositories**
 5. Add the following URL:
@@ -92,11 +92,11 @@ To install it, you need to add this repository as a custom repository:
    https://github.com/jantimon/ha-addon-ssh
    ```
 6. Click **Add** and then **Close**
-7. Refresh the page and find "SSH & Claude Code Terminal" in the add-on store
+7. Refresh the page and find "SSH & Claude Code Terminal" in the app store
 8. Click **Install**
 
 After installation, configure your username and password/SSH keys, then start
-the add-on.
+the app.
 
 ## Using Claude Code
 

@@ -9,7 +9,7 @@ This fork includes [Claude Code][claude-code], an AI-powered coding assistant
 that can help you optimize your Home Assistant configuration, write automations,
 and troubleshoot issues directly from the terminal.
 
-Based on the [SSH add-on by Home Assistant Community Add-ons][hass-ssh],
+Based on the [SSH app by Home Assistant Community Apps][hass-ssh],
 this version focuses on security, usability, and AI-assisted configuration.
 
 ## WARNING
@@ -74,8 +74,8 @@ To install it, you need to add this repository as a custom repository:
 1. Refresh the page and find "SSH & Claude Code Terminal" in the app store.
 1. Click **Install**.
 1. Configure the `username` and `password`/`authorized_keys` options.
-1. Start the "SSH & Claude Code Terminal" add-on.
-1. Check the logs of the add-on to see if everything went well.
+1. Start the "SSH & Claude Code Terminal" app.
+1. Check the logs of the app to see if everything went well.
 
 ## Configuration
 
@@ -238,9 +238,9 @@ single time this app starts.
 
 #### Option: `claude_md`
 
-Define the contents of your `CLAUDE.md` file through the add-on configuration.
+Define the contents of your `CLAUDE.md` file through the app configuration.
 Each line of the file is a separate entry in the list. When configured, this
-file is written to `/homeassistant/CLAUDE.md` on every add-on start.
+file is written to `/homeassistant/CLAUDE.md` on every app start.
 
 Example:
 
@@ -257,11 +257,11 @@ claude_md:
 ```
 
 If left empty, the file is not touched, allowing you to edit it directly via
-the File Editor add-on or VS Code.
+the File Editor app or VS Code.
 
 ## Using Claude Code
 
-This add-on comes with [Claude Code][claude-code] pre-installed, an AI-powered
+This app comes with [Claude Code][claude-code] pre-installed, an AI-powered
 coding assistant from Anthropic that can help you with Home Assistant
 configuration.
 
@@ -324,12 +324,12 @@ and customize.
 
 ### Session Persistence
 
-Claude Code settings, history, and authentication persist across add-on restarts.
+Claude Code settings, history, and authentication persist across app restarts.
 All data is stored in `/data/.claude/`.
 
 ### YAML Validation
 
-This add-on also includes `yamllint` for validating your YAML files:
+This app also includes `yamllint` for validating your YAML files:
 
 ```bash
 # Validate a specific file
@@ -399,7 +399,7 @@ Got questions?
 
 This fork is maintained by [Jan Nicklas][jantimon].
 
-The original add-on was created by [Franck Nijhof][frenck].
+The original app was created by [Franck Nijhof][frenck].
 
 For a full list of all authors and contributors,
 check [the contributors page][contributors].
