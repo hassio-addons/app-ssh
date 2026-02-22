@@ -1,0 +1,233 @@
+#!/usr/bin/env python3
+"""ha-dashboard — Get/set Home Assistant Lovelace dashboard configs via WebSocket API.
+
+Usage:
+  ha-dashboard list               List all dashboards (url_path + title)
+  ha-dashboard get <url_path>     Print dashboard config JSON to stdout
+  ha-dashboard set <url_path>     Read JSON from stdin and save to HA
+
+Authentication (in priority order):
+  1. HA_TOKEN environment variable
+  2. /homeassistant/.claude/ha_token file
+
+Setup:
+  In HA: Profile → Security → Long-Lived Access Tokens → Create Token
+  echo "your_token" > /homeassistant/.claude/ha_token
+  chmod 600 /homeassistant/.claude/ha_token
+"""
+
+import base64
+import json
+import os
+import socket
+import struct
+import sys
+
+HA_HOST = "localhost"
+HA_PORT = 8123
+TOKEN_FILE = "/homeassistant/.claude/ha_token"
+
+
+def get_token():
+    token = os.environ.get("HA_TOKEN")
+    if not token and os.path.exists(TOKEN_FILE):
+        with open(TOKEN_FILE) as f:
+            token = f.read().strip()
+    if not token:
+        print(
+            "Error: No HA token found.\n"
+            "Set HA_TOKEN env var or create a long-lived token:\n"
+            "  HA UI → Profile → Security → Long-Lived Access Tokens → Create Token\n"
+            f"  echo 'your_token' > {TOKEN_FILE}\n"
+            f"  chmod 600 {TOKEN_FILE}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    return token
+
+
+# --- Minimal WebSocket client (stdlib only) ---
+
+class WS:
+    """Minimal WebSocket client with a persistent receive buffer.
+
+    HA sends the first frame (auth_required) in the same TCP segment as the
+    HTTP 101 response, so we must carry over any bytes past the header boundary.
+    """
+
+    def __init__(self):
+        self._sock = socket.create_connection((HA_HOST, HA_PORT), timeout=10)
+        self._buf = b""
+        self._handshake()
+
+    def _handshake(self):
+        key = base64.b64encode(os.urandom(16)).decode()
+        request = (
+            f"GET /api/websocket HTTP/1.1\r\n"
+            f"Host: {HA_HOST}:{HA_PORT}\r\n"
+            f"Upgrade: websocket\r\n"
+            f"Connection: Upgrade\r\n"
+            f"Sec-WebSocket-Key: {key}\r\n"
+            f"Sec-WebSocket-Version: 13\r\n"
+            f"\r\n"
+        )
+        self._sock.sendall(request.encode())
+
+        # Read until the end of HTTP headers, keeping any leftover bytes.
+        while b"\r\n\r\n" not in self._buf:
+            chunk = self._sock.recv(4096)
+            if not chunk:
+                raise RuntimeError("Connection closed during WebSocket handshake")
+            self._buf += chunk
+
+        end = self._buf.index(b"\r\n\r\n") + 4
+        headers, self._buf = self._buf[:end], self._buf[end:]
+
+        if b"101" not in headers.split(b"\r\n", 1)[0]:
+            raise RuntimeError(f"WebSocket upgrade failed: {headers[:200]}")
+
+    def _read(self, n: int) -> bytes:
+        """Read exactly n bytes, using the internal buffer first."""
+        while len(self._buf) < n:
+            chunk = self._sock.recv(4096)
+            if not chunk:
+                raise RuntimeError("Connection closed while reading")
+            self._buf += chunk
+        data, self._buf = self._buf[:n], self._buf[n:]
+        return data
+
+    def recv(self) -> dict:
+        """Receive one WebSocket frame and return parsed JSON."""
+        header = self._read(2)
+        masked = (header[1] & 0x80) != 0
+        length = header[1] & 0x7F
+
+        if length == 126:
+            length = struct.unpack(">H", self._read(2))[0]
+        elif length == 127:
+            length = struct.unpack(">Q", self._read(8))[0]
+
+        mask = self._read(4) if masked else b""
+        payload = self._read(length)
+
+        if masked:
+            payload = bytes(b ^ mask[i % 4] for i, b in enumerate(payload))
+
+        return json.loads(payload.decode())
+
+    def send(self, data: dict):
+        """Send a masked WebSocket text frame containing JSON."""
+        payload = json.dumps(data).encode()
+        length = len(payload)
+        mask_key = os.urandom(4)
+        masked = bytes(b ^ mask_key[i % 4] for i, b in enumerate(payload))
+
+        if length < 126:
+            header = bytes([0x81, 0x80 | length]) + mask_key
+        elif length < 65536:
+            header = bytes([0x81, 0xFE]) + struct.pack(">H", length) + mask_key
+        else:
+            header = bytes([0x81, 0xFF]) + struct.pack(">Q", length) + mask_key
+
+        self._sock.sendall(header + masked)
+
+    def close(self):
+        self._sock.close()
+
+
+def ha_call(command: dict) -> dict:
+    """Connect to HA WebSocket, authenticate, send one command, return result."""
+    ws = WS()
+    try:
+        msg = ws.recv()
+        if msg.get("type") != "auth_required":
+            raise RuntimeError(f"Expected auth_required, got: {msg}")
+
+        ws.send({"type": "auth", "access_token": get_token()})
+        msg = ws.recv()
+        if msg.get("type") != "auth_ok":
+            raise RuntimeError(
+                "Authentication failed. Check your token in "
+                f"HA_TOKEN env var or {TOKEN_FILE}"
+            )
+
+        command["id"] = 1
+        ws.send(command)
+        return ws.recv()
+    finally:
+        ws.close()
+
+
+# --- Commands ---
+
+def cmd_list():
+    result = ha_call({"type": "lovelace/dashboards/list"})
+    if not result.get("success"):
+        print(f"Error: {result.get('error', result)}", file=sys.stderr)
+        sys.exit(1)
+    dashboards = result.get("result", [])
+    if not dashboards:
+        print("(no custom dashboards — only the default dashboard exists)")
+        return
+    for d in dashboards:
+        title = d.get("title", "(no title)")
+        url = d.get("url_path", "?")
+        print(f"{url:30s}  {title}")
+
+
+def cmd_get(url_path: str):
+    cmd = {"type": "lovelace/config"}
+    if url_path != "default":
+        cmd["url_path"] = url_path
+    result = ha_call(cmd)
+    if not result.get("success"):
+        print(f"Error: {result.get('error', result)}", file=sys.stderr)
+        sys.exit(1)
+    print(json.dumps(result["result"], indent=2))
+
+
+def cmd_set(url_path: str):
+    try:
+        config = json.load(sys.stdin)
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON from stdin: {e}", file=sys.stderr)
+        sys.exit(1)
+    cmd = {"type": "lovelace/config/save", "config": config}
+    if url_path != "default":
+        cmd["url_path"] = url_path
+    result = ha_call(cmd)
+    if not result.get("success"):
+        print(f"Error: {result.get('error', result)}", file=sys.stderr)
+        sys.exit(1)
+    print(f"Dashboard '{url_path}' saved successfully.")
+
+
+# --- Entry point ---
+
+def main():
+    args = sys.argv[1:]
+    if not args or args[0] in ("-h", "--help"):
+        print(__doc__)
+        sys.exit(0 if args else 1)
+
+    command = args[0]
+
+    if command == "list":
+        cmd_list()
+    elif command == "get":
+        if len(args) < 2:
+            print("Usage: ha-dashboard get <url_path>", file=sys.stderr)
+            sys.exit(1)
+        cmd_get(args[1])
+    elif command == "set":
+        if len(args) < 2:
+            print("Usage: ha-dashboard set <url_path>  (reads JSON from stdin)", file=sys.stderr)
+            sys.exit(1)
+        cmd_set(args[1])
+    else:
+        print(f"Unknown command: {command!r}. Use list, get, or set.", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
