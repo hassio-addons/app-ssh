@@ -56,8 +56,8 @@ RUN \
         ncurses=6.5_p20251123-r0 \
         net-tools=2.10-r3 \
         nmap=7.97-r0 \
-        nodejs=22.16.0-r2 \
-        npm=11.6.4-r0 \
+        nodejs=24.13.0-r1 \
+        npm=11.6.3-r0 \
         openssh=10.2_p1-r0 \
         openssl=3.5.5-r0 \
         procps-ng=4.0.5-r0 \
