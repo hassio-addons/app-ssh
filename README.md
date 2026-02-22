@@ -1,4 +1,4 @@
-# Home Assistant Add-on: SSH & Claude Code Terminal
+# Home Assistant App: SSH & Claude Code Terminal
 
 [![GitHub Release][releases-shield]][releases]
 [![License][license-shield]](LICENSE.md)
@@ -8,7 +8,7 @@
 
 [![Github Actions][github-actions-shield]][github-actions]
 
-This add-on allows you to log in to your Home Assistant instance using
+This app allows you to log in to your Home Assistant instance using
 SSH or Web Terminal, with [Claude Code][claude-code] pre-installed for
 AI-assisted Home Assistant configuration.
 
@@ -16,7 +16,7 @@ AI-assisted Home Assistant configuration.
 
 ## About
 
-This add-on allows you to log in to your Home Assistant instance using
+This app allows you to log in to your Home Assistant instance using
 SSH or a Web Terminal, giving you access to your folders and
 also includes a command-line tool to do things like restart, update,
 and check your instance.
@@ -26,21 +26,21 @@ help you optimize your Home Assistant configuration, write automations,
 and troubleshoot issues directly from the terminal.
 
 Based on the [Advanced SSH & Web Terminal add-on][upstream] by the
-Home Assistant Community Add-ons project.
+Home Assistant Community app project.
 
-[:books: Read the full add-on documentation][docs]
+[:books: Read the full app documentation][docs]
 
 ## WARNING
 
-The advanced SSH & Web Terminal add-on is very powerful and gives you access
+The advanced SSH & Web Terminal app is very powerful and gives you access
 to almost all tools and hardware of your system.
 
-While this add-on is created and maintained with care and with security in mind,
+While this app is created and maintained with care and with security in mind,
 in the wrong or inexperienced hands, it could damage your system.
 
 ## Features
 
-This add-on, of course, provides an SSH server, based on [OpenSSH][openssh] and
+This app, of course, provides an SSH server, based on [OpenSSH][openssh] and
 a web-based Terminal (which can be included in your Home Assistant frontend) as
 well. Additionally, it comes out of the box with the following:
 
@@ -49,7 +49,7 @@ well. Additionally, it comes out of the box with the following:
   - Only allows login by the configured user, even if more users are created.
   - Only uses known secure ciphers and algorithms.
   - Limits login attempts to hold off brute-force attacks better.
-  - Many more security tweaks, _this addon passes all [ssh-audit] checks
+  - Many more security tweaks, _this app passes all [ssh-audit] checks
     without warnings!_
     ![Result of SSH-Audit][ssh-audit-image]
 - Comes with an SSH compatibility mode option to allow older clients to connect.
@@ -57,7 +57,7 @@ well. Additionally, it comes out of the box with the following:
 - SFTP support is disabled by default but is user configurable.
 - Compatible if Home Assistant was installed via the generic Linux installer.
 - Username is configurable, so `root` is no longer mandatory.
-- Persists custom SSH client settings & keys between add-on restarts
+- Persists custom SSH client settings & keys between app restarts
 - Log levels for allowing you to triage issues easier.
 - Hardware access to your audio, uart/serial devices and GPIO pins.
 - Runs with more privileges, allowing you to debug and test more situations.
@@ -66,7 +66,7 @@ well. Additionally, it comes out of the box with the following:
 - Runs on host level network, allowing you to open ports or run little daemons.
 - Have custom Alpine packages installed on start. This allows you to install
   your favorite tools, which will be available every single time you log in.
-- Execute custom commands on add-on start so that you can customize the
+- Execute custom commands on app start so that you can customize the
   shell to your likings.
 - [ZSH][zsh] as its default shell. Easier to use for the beginner, more advanced
   for the more experienced user. It even comes preloaded with
@@ -122,7 +122,7 @@ Got questions?
 
 You have several options to get them answered:
 
-- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
+- The [Home Assistant Community Apps Discord chat server][discord] for app
   support and feature requests.
 - The [Home Assistant Discord chat server][discord-ha] for general Home
   Assistant discussions and questions.
@@ -148,18 +148,18 @@ The original setup of this repository is by [Franck Nijhof][frenck].
 For a full list of all authors and contributors,
 check [the contributors page][contributors].
 
-## We have got some Home Assistant add-ons for you
+## We have got some Home Assistant apps for you
 
 Want some more functionality to your Home Assistant instance?
 
-We have created multiple add-ons for Home Assistant. For a full list, check out
+We have created multiple apps for Home Assistant. For a full list, check out
 our [GitHub Repository][repository].
 
 ## License
 
 MIT License
 
-Copyright (c) 2017-2025 Franck Nijhof
+Copyright (c) 2017-2026 Franck Nijhof
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -182,20 +182,33 @@ SOFTWARE.
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [claude-code]: https://claude.ai/code
-[contributors]: https://github.com/jantimon/ha-addon-ssh/graphs/contributors
+[commits-shield]: https://img.shields.io/github/commit-activity/y/hassio-addons/app-ssh.svg
+[commits]: https://github.com/hassio-addons/app-ssh/commits/main
+[contributors]: https://github.com/hassio-addons/app-ssh/graphs/contributors
 [discord-ha]: https://discord.gg/c5DvZ4e
-[docs]: https://github.com/jantimon/ha-addon-ssh/blob/main/ssh/DOCS.md
+[discord-shield]: https://img.shields.io/discord/478094546522079232.svg
+[discord]: https://discord.me/hassioaddons
+[docs]: https://github.com/hassio-addons/app-ssh/blob/main/ssh/DOCS.md
+[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io/t/community-hass-io-add-on-ssh-web-terminal/33820?u=frenck
 [frenck]: https://github.com/frenck
-[github-actions-shield]: https://github.com/jantimon/ha-addon-ssh/workflows/CI/badge.svg
-[github-actions]: https://github.com/jantimon/ha-addon-ssh/actions
-[issue]: https://github.com/jantimon/ha-addon-ssh/issues
-[license-shield]: https://img.shields.io/github/license/jantimon/ha-addon-ssh.svg
+[github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
+[github-sponsors]: https://github.com/sponsors/frenck
+[github-actions-shield]: https://github.com/hassio-addons/app-ssh/workflows/CI/badge.svg
+[github-actions]: https://github.com/hassio-addons/app-ssh/actions
+[hass-ssh]: https://github.com/home-assistant/addons/tree/master/ssh
+[issue]: https://github.com/hassio-addons/app-ssh/issues
+[license-shield]: https://img.shields.io/github/license/hassio-addons/app-ssh.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [ohmyzsh]: http://ohmyz.sh/
 [openssh]: https://www.openssh.com/
+[patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
+[patreon]: https://www.patreon.com/frenck
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
 [reddit]: https://reddit.com/r/homeassistant
-[releases-shield]: https://img.shields.io/github/release/jantimon/ha-addon-ssh.svg
-[releases]: https://github.com/jantimon/ha-addon-ssh/releases
+[releases-shield]: https://img.shields.io/github/release/hassio-addons/app-ssh.svg
+[releases]: https://github.com/hassio-addons/app-ssh/releases
+[repository]: https://github.com/hassio-addons/repository
 [semver]: http://semver.org/spec/v2.0.0.htm
 [ssh-audit-image]: images/ssh-audit.png
 [ssh-audit]: https://github.com/jtesta/ssh-audit

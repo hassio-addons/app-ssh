@@ -1,6 +1,6 @@
-# Home Assistant Add-on: SSH & Claude Code Terminal
+# Home Assistant App: SSH & Claude Code Terminal
 
-This add-on allows you to log in to your Home Assistant instance using
+This app allows you to log in to your Home Assistant instance using
 SSH or a Web Terminal, giving you access to your folders and
 also includes a command-line tool to do things like restart, update,
 and check your instance.
@@ -14,15 +14,15 @@ this version focuses on security, usability, and AI-assisted configuration.
 
 ## WARNING
 
-The SSH & Claude Code Terminal add-on is very powerful and gives you access
+The SSH & Claude Code Terminal app is very powerful and gives you access
 to almost all tools and hardware of your system.
 
-While this add-on is created and maintained with care and with security in mind,
+While this app is created and maintained with care and with security in mind,
 in the wrong or inexperienced hands, it could damage your system.
 
 ## Features
 
-This add-on, of course, provides an SSH server, based on [OpenSSH][openssh] and
+This app, of course, provides an SSH server, based on [OpenSSH][openssh] and
 a web-based Terminal (which can be included in your Home Assistant frontend) as
 well. Additionally, it comes out of the box with the following:
 
@@ -36,7 +36,7 @@ well. Additionally, it comes out of the box with the following:
 - SFTP support is disabled by default but is user configurable.
 - Compatible if Home Assistant was installed via the generic Linux installer.
 - Username is configurable, so `root` is no longer mandatory.
-- Persists custom SSH client settings & keys between add-on restarts
+- Persists custom SSH client settings & keys between app restarts
 - Log levels for allowing you to triage issues easier.
 - Hardware access to your audio, uart/serial devices and GPIO pins.
 - Runs with more privileges, allowing you to debug and test more situations.
@@ -45,7 +45,7 @@ well. Additionally, it comes out of the box with the following:
 - Runs on host level network, allowing you to open ports or run little daemons.
 - Have custom Alpine packages installed on start. This allows you to install
   your favorite tools, which will be available every single time you log in.
-- Execute custom commands on add-on start so that you can customize the
+- Execute custom commands on app start so that you can customize the
   shell to your likings.
 - [ZSH][zsh] as its default shell. Easier to use for the beginner, more advanced
   for the more experienced user. It even comes preloaded with
@@ -59,11 +59,11 @@ well. Additionally, it comes out of the box with the following:
 
 ## Installation
 
-This add-on is not part of the official Home Assistant add-on store.
+This app is not part of the official Home Assistant app store.
 To install it, you need to add this repository as a custom repository:
 
 1. Open your Home Assistant instance.
-1. Navigate to **Settings** → **Add-ons** → **Add-on Store**.
+1. Navigate to **Settings** → **Apps** → **Install App**.
 1. Click the menu (three dots) in the top right corner.
 1. Select **Repositories**.
 1. Add the following URL:
@@ -71,7 +71,7 @@ To install it, you need to add this repository as a custom repository:
    https://github.com/jantimon/ha-addon-ssh
    ```
 1. Click **Add** and then **Close**.
-1. Refresh the page and find "SSH & Claude Code Terminal" in the add-on store.
+1. Refresh the page and find "SSH & Claude Code Terminal" in the app store.
 1. Click **Install**.
 1. Configure the `username` and `password`/`authorized_keys` options.
 1. Start the "SSH & Claude Code Terminal" add-on.
@@ -79,9 +79,9 @@ To install it, you need to add this repository as a custom repository:
 
 ## Configuration
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+**Note**: _Remember to restart the app when the configuration is changed._
 
-SSH add-on configuration:
+SSH app configuration:
 
 ```yaml
 log_level: info
@@ -108,7 +108,7 @@ claude_md: []
 
 ### Option: `log_level`
 
-The `log_level` option controls the level of log output by the addon and can
+The `log_level` option controls the level of log output by the app and can
 be changed to be more or less verbose, which might be useful when you are
 dealing with an unknown issue. Possible values are:
 
@@ -117,7 +117,7 @@ dealing with an unknown issue. Possible values are:
 - `info`: Normal (usually) interesting events.
 - `warning`: Exceptional occurrences that are not errors.
 - `error`: Runtime errors that do not require immediate action.
-- `fatal`: Something went terribly wrong. Add-on becomes unusable.
+- `fatal`: Something went terribly wrong. App becomes unusable.
 
 Please note that each level automatically includes log messages from a
 more severe level, e.g., `debug` also shows `info` messages. By default,
@@ -148,9 +148,9 @@ order to be able to enable the SFTP capabilities._
 
 #### Option `ssh`: `password`
 
-Sets the password to log in with. Leaving it empty would disable the possibility
-to authenticate with a password. We would highly recommend not to use this
-option from a security point of view.
+Sets the password to log in with. Leaving it empty disables authenticating with
+a password. Using public key authentication instead of password authentication
+is highly recommended from a security point of view.
 
 #### Option `ssh` `authorized_keys`
 
@@ -165,7 +165,7 @@ about using public/private key pairs and how to create them.
 
 #### Option `ssh`: `sftp`
 
-When set to `true` the addon will enable SFTP support on the SSH daemon.
+When set to `true` the app will enable SFTP support on the SSH daemon.
 Please only enable it when you plan on using it.
 
 **Note**: _Due to limitations, you will need to set the username to `root` in
@@ -173,7 +173,7 @@ order to be able to enable the SFTP capabilities._
 
 #### Option `ssh`: `compatibility_mode`
 
-This SSH add-on focuses on security and has therefore only enabled known
+This SSH app focuses on security and has therefore only enabled known
 secure encryption methods. However, some older clients do not support these.
 Setting this option to `true` will enable the original default set of methods,
 allowing those clients to connect.
@@ -210,9 +210,9 @@ The following options are shared between both the SSH and the Web Terminal.
 
 #### Option: `zsh`
 
-The add-on has ZSH pre-installed and configured as the default shell.
+The app has ZSH pre-installed and configured as the default shell.
 However, ZSH might not be your preferred choice. By setting this option to
-`false`, you will disable ZSH and the add-on will fallback to Bash instead.
+`false`, you will disable ZSH and the app will fallback to Bash instead.
 
 #### Option: `share_sessions`
 
@@ -228,13 +228,13 @@ Allows you to specify additional [Alpine packages][alpine-packages] to be
 installed in your shell environment (e.g., Python, Joe, Irssi).
 
 **Note**: _Adding many packages will result in a longer start-up
-time for the add-on._
+time for the app._
 
 #### Option: `init_commands`
 
 Customize your shell environment even more with the `init_commands` option.
 Add one or more shell commands to the list, and they will be executed every
-single time this add-on starts.
+single time this app starts.
 
 #### Option: `claude_md`
 
@@ -408,7 +408,7 @@ check [the contributors page][contributors].
 
 MIT License
 
-Copyright (c) 2017-2025 Franck Nijhof
+Copyright (c) 2017-2026 Franck Nijhof
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -430,17 +430,19 @@ SOFTWARE.
 
 [alpine-packages]: https://pkgs.alpinelinux.org/packages
 [claude-code]: https://claude.ai/code
-[contributors]: https://github.com/jantimon/ha-addon-ssh/graphs/contributors
+[contributors]: https://github.com/hassio-addons/app-ssh/graphs/contributors
 [discord-ha]: https://discord.gg/c5DvZ4e
+[discord]: https://discord.me/hassioaddons
+[forum]: https://community.home-assistant.io/t/community-hass-io-add-on-ssh-web-terminal/33820?u=frenck
 [frenck]: https://github.com/frenck
 [github-ssh]: https://help.github.com/articles/connecting-to-github-with-ssh/
-[hass-ssh]: https://github.com/hassio-addons/addon-ssh
-[issue]: https://github.com/jantimon/ha-addon-ssh/issues
+[hass-ssh]: https://github.com/home-assistant/addons/tree/master/ssh
+[issue]: https://github.com/hassio-addons/app-ssh/issues
 [jantimon]: https://github.com/jantimon
 [ohmyzsh]: http://ohmyz.sh/
 [openssh]: https://www.openssh.com/
 [reddit]: https://reddit.com/r/homeassistant
-[releases]: https://github.com/jantimon/ha-addon-ssh/releases
+[releases]: https://github.com/hassio-addons/app-ssh/releases
 [semver]: https://semver.org/spec/v2.0.0.html
 [yamllint]: https://yamllint.readthedocs.io/
 [zsh]: https://en.wikipedia.org/wiki/Z_shell
