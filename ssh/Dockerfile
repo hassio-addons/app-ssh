@@ -21,13 +21,13 @@ RUN \
         bsd-compat-headers=0.7.2-r6 \
         build-base=0.5-r3 \
         cmake=4.1.3-r0 \
-        docker=29.1.3-r2 \
+        docker=29.1.3-r3 \
         json-c-dev=0.18-r1 \
         libffi-dev=3.5.2-r0 \
         libuv-dev=1.51.0-r0 \
         openssl-dev=3.5.5-r0 \
         python3-dev=3.12.12-r0 \
-        zlib-dev=1.3.1-r2 \
+        zlib-dev=1.3.2-r0 \
     \
     && apk add --no-cache \
         ack=3.9.0-r0 \
@@ -35,11 +35,11 @@ RUN \
         alsa-utils=1.2.14-r4 \
         awake=1.0-r12 \
         bash-completion=2.17.0-r1 \
-        bind-tools=9.20.20-r0 \
+        bind-tools=9.20.21-r0 \
         bluez=5.85-r0 \
         colordiff=1.0.21-r0 \
-        docker-bash-completion=29.1.3-r2 \
-        docker-zsh-completion=29.1.3-r2 \
+        docker-bash-completion=29.1.3-r3 \
+        docker-zsh-completion=29.1.3-r3 \
         gcompat=1.1.0-r4 \
         git=2.52.0-r0 \
         htop=3.4.1-r1 \
@@ -68,7 +68,7 @@ RUN \
         sudo=1.9.17_p2-r0 \
         tmux=3.6-r0 \
         ttyd=1.7.7-r0 \
-        vim=9.2.0078-r0 \
+        vim=9.2.0272-r0 \
         wget=1.25.0-r2 \
         zip=3.0-r13 \
         zsh-autosuggestions=0.7.1-r0 \
