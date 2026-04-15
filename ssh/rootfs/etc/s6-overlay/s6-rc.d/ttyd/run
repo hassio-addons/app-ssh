@@ -23,6 +23,10 @@ options+=(-i hassio)
 # We want to be able to use the terminal
 options+=(--writable)
 
+# Force explicit terminal colors to ensure readability regardless of
+# browser color-scheme settings (fixes invisible text on Safari/iOS)
+options+=(--theme '{"background":"#1e1e1e","foreground":"#d4d4d4","cursor":"#d4d4d4","cursorAccent":"#1e1e1e","selection":"rgba(255,255,255,0.3)"}')
+
 # Get assigned Ingress port
 ingress_port=$(bashio::addon.ingress_port)
 options+=(-p "${ingress_port}")
