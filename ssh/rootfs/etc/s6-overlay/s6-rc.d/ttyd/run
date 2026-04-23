@@ -23,6 +23,11 @@ options+=(-i hassio)
 # We want to be able to use the terminal
 options+=(--writable)
 
+# Use DOM renderer for xterm.js to ensure compatibility with iOS Safari
+# and other browsers where WebGL/Canvas rendering causes display issues
+# Fixes: #1016, #1026, #1027
+options+=(--client-option rendererType=dom)
+
 # Get assigned Ingress port
 ingress_port=$(bashio::addon.ingress_port)
 options+=(-p "${ingress_port}")
