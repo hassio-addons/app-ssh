@@ -6,7 +6,9 @@ FROM ${BUILD_FROM}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Add env
-ENV TERM="xterm-256color"
+ENV \
+    TERM="xterm-256color" \
+    S6_STAGE2_HOOK=/etc/s6-overlay/scripts/enable-check.sh
 
 # Copy Python requirements file
 COPY requirements.txt /tmp/
