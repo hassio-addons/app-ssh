@@ -1,3 +1,9 @@
+# User-supplied extras
+# ===================
+# OpenSSH uses unintuitive “first value wins” rules, so any value set in an
+# override file will override the values below only if the Include is *first*.
+Include sshd_config.d/*.conf
+
 # Basics
 # ===================
 Port 22
