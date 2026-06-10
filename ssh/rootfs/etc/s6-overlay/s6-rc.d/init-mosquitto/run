@@ -23,6 +23,10 @@ if bashio::services.available "mqtt"; then
     echo "--username ${username}"
   } > /root/.config/mosquitto_sub
 
+  # Credentials are stored in plain text, keep them owner-only readable
+  chmod 600 /root/.config/mosquitto_sub \
+    || bashio::exit.nok 'Failed securing the Mosquitto client configuration'
+
   ln -s /root/.config/mosquitto_sub /root/.config/mosquitto_pub
   ln -s /root/.config/mosquitto_sub /root/.config/mosquitto_rr
 fi

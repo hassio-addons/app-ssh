@@ -23,4 +23,8 @@ if bashio::services.available "mysql"; then
     echo "port=${port}"
     echo "user=\"${username}\""
   } > /etc/my.cnf.d/service.cnf
+
+  # Credentials are stored in plain text, keep them owner-only readable
+  chmod 600 /etc/my.cnf.d/service.cnf \
+    || bashio::exit.nok 'Failed securing the MySQL client configuration'
 fi
