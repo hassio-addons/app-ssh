@@ -52,6 +52,7 @@ RUN \
         libxml2-utils=2.13.9-r2 \
         lsblk=2.42-r0 \
         mariadb-client=11.8.8-r0 \
+        mc=4.8.33-r3 \
         mosh=1.4.0-r18 \
         mosquitto-clients=2.1.2-r1 \
         mtr=0.96-r2 \
