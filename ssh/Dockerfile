@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base:20.1.1
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:21.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -19,61 +19,61 @@ ARG HA_CLI_VERSION="5.1.0"
 RUN \
     apk add --no-cache --virtual .build-dependencies \
         bsd-compat-headers=0.7.2-r6 \
-        build-base=0.5-r3 \
-        cmake=4.1.3-r0 \
-        docker=29.5.1-r0 \
+        build-base=0.5-r4 \
+        cmake=4.2.3-r0 \
+        docker=29.5.3-r0 \
         json-c-dev=0.18-r1 \
-        libffi-dev=3.5.2-r0 \
-        libuv-dev=1.51.0-r0 \
-        openssl-dev=3.5.6-r0 \
-        python3-dev=3.12.13-r0 \
+        libffi-dev=3.5.2-r1 \
+        libuv-dev=1.52.1-r0 \
+        openssl-dev=3.5.7-r0 \
+        python3-dev=3.14.5-r0 \
         zlib-dev=1.3.2-r0 \
     \
     && apk add --no-cache \
-        ack=3.9.0-r0 \
+        ack=3.10.0-r0 \
         alsa-plugins-pulse=1.2.12-r2 \
-        alsa-utils=1.2.14-r4 \
-        awake=1.0-r12 \
+        alsa-utils=1.2.15.2-r1 \
+        awake=1.0-r13 \
         bash-completion=2.17.0-r1 \
         bind-tools=9.20.23-r0 \
-        bluez=5.85-r0 \
-        colordiff=1.0.21-r0 \
-        docker-bash-completion=29.5.1-r0 \
-        docker-zsh-completion=29.5.1-r0 \
+        bluez=5.86-r2 \
+        colordiff=1.0.22-r0 \
+        docker-bash-completion=29.5.3-r0 \
+        docker-zsh-completion=29.5.3-r0 \
         gcompat=1.1.0-r4 \
-        git=2.52.0-r0 \
-        htop=3.4.1-r1 \
+        git=2.54.0-r0 \
+        htop=3.5.1-r1 \
         json-c=0.18-r1 \
-        libltdl=2.5.4-r2 \
-        libstdc++=15.2.0-r2 \
-        libuv=1.51.0-r0 \
-        libxml2-utils=2.13.9-r0 \
-        mariadb-client=11.4.10-r0 \
+        libltdl=2.6.0-r1 \
+        libstdc++=15.2.0-r5 \
+        libuv=1.52.1-r0 \
+        libxml2-utils=2.13.9-r2 \
+        mariadb-client=11.8.8-r0 \
         mosh=1.4.0-r18 \
-        mosquitto-clients=2.0.22-r0 \
-        nano-syntax=8.7-r0 \
-        nano=8.7-r0 \
-        ncurses=6.5_p20251123-r0 \
+        mosquitto-clients=2.1.2-r1 \
+        nano-syntax=9.0-r0 \
+        nano=9.0-r0 \
+        ncurses=6.6_p20260516-r0 \
         net-tools=2.10-r3 \
-        nmap=7.97-r0 \
-        openssh=10.2_p1-r0 \
-        openssl=3.5.6-r0 \
-        procps-ng=4.0.5-r0 \
+        nmap=7.99-r0 \
+        openssh=10.3_p1-r0 \
+        openssl=3.5.7-r0 \
+        procps-ng=4.0.6-r0 \
         pwgen=2.08-r3 \
-        pulseaudio-utils=17.0-r5 \
-        py3-pip=25.1.1-r1 \
-        python3=3.12.13-r0 \
-        rsync=3.4.3-r0 \
-        sqlite=3.51.2-r0 \
-        sudo=1.9.17_p2-r0 \
-        tmux=3.6-r0 \
+        pulseaudio-utils=17.0-r7 \
+        py3-pip=26.1.2-r0 \
+        python3=3.14.5-r0 \
+        rsync=3.4.3-r1 \
+        sqlite=3.53.2-r0 \
+        sudo=1.9.17_p2-r1 \
+        tmux=3.6b-r0 \
         ttyd=1.7.7-r0 \
-        vim=9.2.0514-r0 \
-        wget=1.25.0-r2 \
+        vim=9.2.0602-r0 \
+        wget=1.25.0-r3 \
         zip=3.0-r13 \
         zsh-autosuggestions=0.7.1-r0 \
         zsh-syntax-highlighting=0.8.0-r1 \
-        zsh=5.9-r6 \
+        zsh=5.9-r7 \
     \
     && git clone --depth 1 \
         https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
