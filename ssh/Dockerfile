@@ -56,6 +56,7 @@ RUN \
         nano-syntax=9.0-r0 \
         nano=9.0-r0 \
         ncurses=6.6_p20260516-r0 \
+        neovim=0.12.2-r0 \
         net-tools=2.10-r3 \
         nmap=7.99-r0 \
         openssh=10.3_p1-r0 \
@@ -70,7 +71,6 @@ RUN \
         sudo=1.9.17_p2-r1 \
         tmux=3.6b-r0 \
         ttyd=1.7.7-r0 \
-        vim=9.2.0602-r0 \
         wget=1.25.0-r3 \
         zip=3.0-r13 \
         zsh-autosuggestions=0.7.1-r0 \
@@ -89,6 +89,10 @@ RUN \
     && sed -i -e "s#bin/sh#bin/zsh#" /etc/passwd \
     \
     && cp /usr/bin/docker /usr/local/bin/.undocked \
+    \
+    && ln -s -f /usr/bin/nvim /usr/bin/vim \
+    && ln -s -f /usr/bin/nvim /usr/bin/vi \
+    && ln -s -f /usr/bin/nvim /usr/bin/neovim \
     \
     && pip3 install -r /tmp/requirements.txt \
     \
