@@ -6,11 +6,6 @@
 # ==============================================================================
 declare -a options
 
-# If SSH is disabled, use a fake sleep process
-if ! bashio::var.has_value "$(bashio::app.port 22)"; then
-    exec sleep 864000
-fi
-
 bashio::log.info 'Starting the SSH daemon...'
 
 # Default options
