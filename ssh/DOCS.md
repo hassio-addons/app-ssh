@@ -49,7 +49,7 @@ well. Additionally, it comes out of the box with the following:
   ["Oh My ZSH"][ohmyzsh], with some plugins enabled as well.
 - Contains a sensible set of tools right out of the box: curl, Wget, RSync, GIT,
   Nmap, Mosquitto client, MariaDB/MySQL client, Awake ("wake on LAN"), Nano,
-  Vim, tmux, and a bunch commonly used networking tools.
+  Neovim, tmux, and a bunch commonly used networking tools.
 
 ## Installation
 
