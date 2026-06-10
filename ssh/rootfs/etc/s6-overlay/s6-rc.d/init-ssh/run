@@ -155,9 +155,9 @@ fi
 
 # This enabled less strict ciphers, macs, and keyx.
 if bashio::config.true 'ssh.compatibility_mode'; then
-    sed -i '/Ciphers\ .*/s/^/#/g' "${SSH_CONFIG_PATH}"
-    sed -i '/MACs\ .*/s/^/#/g' "${SSH_CONFIG_PATH}"
-    sed -i '/KexAlgorithms\.* /s/^/#/g' "${SSH_CONFIG_PATH}"
+    sed -i '/^Ciphers /s/^/#/' "${SSH_CONFIG_PATH}"
+    sed -i '/^MACs /s/^/#/' "${SSH_CONFIG_PATH}"
+    sed -i '/^KexAlgorithms /s/^/#/' "${SSH_CONFIG_PATH}"
     bashio::log.notice 'SSH is running in compatibility mode!'
     bashio::log.warning 'Compatibility mode is less secure!'
     bashio::log.warning 'Please only enable it when you know what you are doing!'
