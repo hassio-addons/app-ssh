@@ -118,7 +118,8 @@ else
     # Use a random password in case none is set
     password=$(pwgen 64 1)
 fi
-chpasswd <<< "${username}:${password}" 2&> /dev/null
+chpasswd <<< "${username}:${password}" 2> /dev/null \
+    || bashio::exit.nok 'Failed setting the password for the user account'
 
 # Sets up the authorized SSH keys
 if bashio::config.has_value 'ssh.authorized_keys'; then
