@@ -53,12 +53,14 @@ RUN \
         mariadb-client=11.8.8-r0 \
         mosh=1.4.0-r18 \
         mosquitto-clients=2.1.2-r1 \
+        mtr=0.96-r2 \
         nano-syntax=9.0-r0 \
         nano=9.0-r0 \
         ncurses=6.6_p20260516-r0 \
         neovim=0.12.2-r0 \
         net-tools=2.10-r3 \
         nmap=7.99-r0 \
+        nmap-ncat=7.99-r0 \
         openssh=10.3_p1-r0 \
         openssl=3.5.7-r0 \
         procps-ng=4.0.6-r0 \
@@ -69,6 +71,7 @@ RUN \
         rsync=3.4.3-r1 \
         sqlite=3.53.2-r0 \
         sudo=1.9.17_p2-r1 \
+        tcpdump=4.99.6-r1 \
         tmux=3.6b-r0 \
         ttyd=1.7.7-r0 \
         wget=1.25.0-r3 \
