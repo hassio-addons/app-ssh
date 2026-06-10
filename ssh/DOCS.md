@@ -225,6 +225,20 @@ Customize your shell environment even more with the `init_commands` option.
 Add one or more shell commands to the list, and they will be executed every
 single time this app starts.
 
+## Clipboard: copying and pasting
+
+The Web Terminal is based on xterm.js, which follows X11-style clipboard
+conventions that may differ from what you expect:
+
+- **Copy**: hold `Shift` and select the text with your mouse. The selection is
+  copied to your system clipboard right away (a small scissors icon briefly
+  pops up). There is no need to press `Ctrl+C`.
+- **Paste**: press `Ctrl+Shift+V`, or right-click and choose paste, depending
+  on your browser.
+
+This applies to the Web Terminal in the Home Assistant frontend. A regular SSH
+client uses the clipboard behavior of its own terminal instead.
+
 ## Known issues and limitations
 
 - When SFTP is enabled, the username MUST be set to `root`.
