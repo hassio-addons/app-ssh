@@ -216,6 +216,22 @@ effectively sets SSH to behave as it used to be.
 Allows you to specify additional [Alpine packages][alpine-packages] to be
 installed in your shell environment (e.g., Python, Joe, Irssi).
 
+The packages are installed using Alpine's package manager, so any package name
+from the [Alpine package index][alpine-packages] works. List the package names
+exactly as they appear there. For example:
+
+```yaml
+packages:
+  - iperf3
+  - socat
+  - joe
+```
+
+This installs the packages on every start, so they are always available when
+you log in. Note that package names are not always the same as the command
+they provide (for example, the `ncat` command comes from the `nmap-ncat`
+package).
+
 **Note**: _Adding many packages will result in a longer start-up
 time for the app._
 
