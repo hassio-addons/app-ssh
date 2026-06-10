@@ -50,12 +50,14 @@ RUN \
         libstdc++=15.2.0-r5 \
         libuv=1.52.1-r0 \
         libxml2-utils=2.13.9-r2 \
+        lsblk=2.42-r0 \
         mariadb-client=11.8.8-r0 \
         mosh=1.4.0-r18 \
         mosquitto-clients=2.1.2-r1 \
         mtr=0.96-r2 \
         nano-syntax=9.0-r0 \
         nano=9.0-r0 \
+        ncdu=1.22-r2 \
         ncurses=6.6_p20260516-r0 \
         neovim=0.12.2-r0 \
         net-tools=2.10-r3 \
@@ -69,6 +71,7 @@ RUN \
         py3-pip=26.1.2-r0 \
         python3=3.14.5-r0 \
         rsync=3.4.3-r1 \
+        smartmontools=7.5-r0 \
         sqlite=3.53.2-r0 \
         sudo=1.9.17_p2-r1 \
         tcpdump=4.99.6-r1 \
