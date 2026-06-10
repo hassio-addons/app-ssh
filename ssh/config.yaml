@@ -51,6 +51,7 @@ map:
   - ssl:rw
 backup_exclude:
   - "*/.vscode-server/**"
+  - "*/.ssh/environment"
 journald: true
 options:
   ssh:
