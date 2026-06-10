@@ -20,7 +20,7 @@ SSH or by using the Web Terminal.
 ## About
 
 This app allows you to log in to your Home Assistant instance using
-SSH or a Web Terminal, giving you to access your folders and
+SSH or a Web Terminal, giving you access to your folders and
 also includes a command-line tool to do things like restart, update,
 and check your instance.
 
@@ -49,9 +49,6 @@ well. Additionally, it comes out of the box with the following:
   - Only allows login by the configured user, even if more users are created.
   - Only uses known secure ciphers and algorithms.
   - Limits login attempts to hold off brute-force attacks better.
-  - Many more security tweaks, _this app passes all [ssh-audit] checks
-    without warnings!_
-    ![Result of SSH-Audit][ssh-audit-image]
 - Comes with an SSH compatibility mode option to allow older clients to connect.
 - Support for Mosh allowing roaming and supports intermittent connectivity.
 - SFTP support is disabled by default but is user configurable.
@@ -88,7 +85,7 @@ You have several options to get them answered:
 - The Home Assistant [Community Forum][forum].
 - Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-You could also [open an issue here][issue] GitHub.
+You could also [open an issue here][issue] on GitHub.
 
 ## Contributing
 
@@ -164,6 +161,4 @@ SOFTWARE.
 [releases]: https://github.com/hassio-addons/app-ssh/releases
 [repository]: https://github.com/hassio-addons/repository
 [semver]: http://semver.org/spec/v2.0.0.htm
-[ssh-audit-image]: images/ssh-audit.png
-[ssh-audit]: https://github.com/jtesta/ssh-audit
 [zsh]: https://en.wikipedia.org/wiki/Z_shell

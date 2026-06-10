@@ -1,7 +1,7 @@
 # Home Assistant Community App: Advanced SSH & Web Terminal
 
 This app allows you to log in to your Home Assistant instance using
-SSH or a Web Terminal, giving you to access your folders and
+SSH or a Web Terminal, giving you access to your folders and
 also includes a command-line tool to do things like restart, update,
 and check your instance.
 
@@ -257,7 +257,7 @@ You have several options to get them answered:
 - The Home Assistant [Community Forum][forum].
 - Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-You could also [open an issue here][issue] GitHub.
+You could also [open an issue here][issue] on GitHub.
 
 ## Authors & contributors
 
