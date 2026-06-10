@@ -245,6 +245,31 @@ client uses the clipboard behavior of its own terminal instead.
 - If you want to use rsync for file transfer, the username MUST be set to
   `root`.
 
+## Running the `ha` command or Supervisor API non-interactively
+
+When you log in interactively, the app starts a login shell that sets up the
+`SUPERVISOR_TOKEN` environment variable. The `ha` command and the Supervisor
+API need that token, so commands like `ha core info` just work.
+
+Running a command non-interactively does **not** start a login shell, so the
+token is not set and the command fails with a `401` error. For example, this
+fails:
+
+```shell
+ssh your-instance "ha core info"
+```
+
+Wrap the command in a login shell so the environment, and with it the token,
+is loaded:
+
+```shell
+ssh your-instance 'bash -lc "ha core info"'
+```
+
+The same applies when calling the Supervisor API directly or running commands
+from automations: invoke them through a login shell (`bash -lc '...'`) so the
+`SUPERVISOR_TOKEN` is available.
+
 ## Changelog & Releases
 
 This repository keeps a change log using [GitHub's releases][releases]
