@@ -24,7 +24,7 @@ options+=(-i hassio)
 options+=(--writable)
 
 # Get assigned Ingress port
-ingress_port=$(bashio::addon.ingress_port)
+ingress_port=$(bashio::app.ingress_port)
 options+=(-p "${ingress_port}")
 
 ttyd_command=(tmux -u new -A -s homeassistant zsh -l)
