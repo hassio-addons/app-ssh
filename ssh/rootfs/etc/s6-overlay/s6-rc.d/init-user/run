@@ -96,14 +96,22 @@ if ! bashio::config.true 'share_sessions'; then
 fi
 
 # Install user configured/requested packages
+#
+# Failures here are intentionally non-fatal: if the package indexes or a
+# package cannot be fetched (e.g. broken DNS or no network), we still want
+# the terminal to come up so the host remains reachable for debugging.
 if bashio::config.has_value 'packages'; then
-    apk update \
-        || bashio::exit.nok 'Failed updating Alpine packages repository indexes'
-
-    for package in $(bashio::config 'packages'); do
-        apk add "$package" \
-            || bashio::exit.nok "Failed installing package ${package}"
-    done
+    if apk update; then
+        for package in $(bashio::config 'packages'); do
+            apk add "$package" \
+                || bashio::log.warning "Failed installing package ${package}"
+        done
+    else
+        bashio::log.warning \
+            'Failed updating the Alpine package indexes, is the network up?'
+        bashio::log.warning \
+            'Skipping installation of custom packages so access stays available.'
+    fi
 fi
 
 # Executes user configured/requested commands on startup
