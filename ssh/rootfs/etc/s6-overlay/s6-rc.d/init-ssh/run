@@ -4,6 +4,8 @@
 # Home Assistant Community App: Advanced SSH & Web Terminal
 # Configures the SSH daemon
 # ==============================================================================
+readonly SSH_CLIENT_DROPIN_DIR=/config/ssh_config.d
+readonly SSH_HOST_DROPIN_DIR=/config/sshd_config.d
 readonly SSH_HOST_AUTHORIZED_KEYS_PATH=/etc/ssh/authorized_keys
 readonly SSH_HOST_CONFIG_PATH=/etc/ssh/sshd_config
 readonly SSH_HOST_ED25519_KEY=/data/ssh_host_ed25519_key
@@ -127,6 +129,9 @@ if bashio::config.has_value 'ssh.authorized_keys'; then
         echo "${key}" >> "${SSH_HOST_AUTHORIZED_KEYS_PATH}"
     done <<< "$(bashio::config 'ssh.authorized_keys')"
 fi
+
+# Ensure drop-in config directories exist
+mkdir -p "${SSH_CLIENT_DROPIN_DIR}" "${SSH_HOST_DROPIN_DIR}"
 
 # Port
 sed -i "s/Port\\ .*/Port\\ ${port}/" "${SSH_HOST_CONFIG_PATH}" \

@@ -1,3 +1,12 @@
+# User-supplied extras
+# ===================
+# OpenSSH uses unintuitive “first value wins” rules, so any value set in an
+# override file will override the values below only if the Include is *first*.
+#
+# The surrounding directory is created by `/etc/s6-overlay/s6-rc.d/sshd/run`
+# on container startup.
+Include /config/sshd_config.d/*.conf
+
 # Basics
 # ===================
 Port 22
@@ -7,7 +16,7 @@ ClientAliveInterval 600
 ClientAliveCountMax 3
 UseDNS no
 
-# Loggin
+# Logging
 # ===================
 SyslogFacility AUTH
 LogLevel VERBOSE
