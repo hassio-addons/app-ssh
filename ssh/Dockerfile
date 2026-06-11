@@ -126,6 +126,11 @@ RUN \
     && chmod 0640 /etc/sudoers.d/* \
     && chmod 0660 /var/log/btmp
 
+# Remove SSH drop-in directories inherited from Alpine to avoid confusion
+# with the drop-in directories managed by /etc/s6-overlay/s6-rc.d/init-ssh/run
+RUN \
+    rmdir /etc/ssh/ssh_config.d /etc/ssh/sshd_config.d
+
 # Hardenings, https://www.sshaudit.com/hardening_guides.html
 RUN \
     awk '$5 >= 3071' /etc/ssh/moduli >/etc/ssh/moduli.safe \
