@@ -50,7 +50,7 @@ RUN \
         libstdc++=15.2.0-r5 \
         libuv=1.52.1-r0 \
         libxml2-utils=2.13.9-r2 \
-        lsblk=2.42-r0 \
+        lsblk=2.42.1-r0 \
         mariadb-client=11.8.8-r0 \
         mc=4.8.33-r3 \
         mosh=1.4.0-r18 \
