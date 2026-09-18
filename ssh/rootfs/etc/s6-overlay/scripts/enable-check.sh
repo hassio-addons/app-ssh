@@ -9,5 +9,5 @@ if ! bashio::var.has_value "$(bashio::app.port 22)"; then
     bashio::log.info \
         "No network port is defined in the configuration so access" \
         "will only be available via the web interface."
-    rm -f /etc/s6-overlay/s6-rc.d/user/contents.d/sshd
+    rm -f /etc/s6-overlay/user-bundles.d/user/contents.d/sshd
 fi
