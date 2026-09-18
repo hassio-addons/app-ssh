@@ -35,6 +35,7 @@ host_dbus: true
 docker_api: true
 privileged:
   - NET_ADMIN
+  - NET_RAW
   - SYS_ADMIN
   - SYS_RAWIO
   - SYS_TIME
