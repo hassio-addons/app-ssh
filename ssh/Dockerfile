@@ -47,6 +47,7 @@ RUN \
         htop=3.5.3-r0 \
         iproute2=7.0.0-r0 \
         json-c=0.18-r1 \
+        kitty-terminfo=0.47.0-r1 \
         libltdl=2.6.0-r1 \
         libstdc++=15.2.0-r5 \
         libuv=1.52.1-r0 \
