@@ -66,6 +66,7 @@ options:
     allow_tcp_forwarding: false
   zsh: true
   share_sessions: false
+  legacy_paths: true
   packages: []
   init_commands: []
 schema:
@@ -82,6 +83,7 @@ schema:
     allow_tcp_forwarding: bool
   zsh: bool
   share_sessions: bool
+  legacy_paths: bool
   packages:
     - str
   init_commands:
