@@ -75,7 +75,7 @@ RUN \
         screen=5.0.2-r0 \
         smartmontools=7.5-r0 \
         sqlite=3.53.4-r0 \
-        sudo=1.9.17_p2-r1 \
+        sudo=1.9.17_p2-r2 \
         tcpdump=4.99.6-r1 \
         tmux=3.7c-r0 \
         ttyd=1.7.7-r0 \
