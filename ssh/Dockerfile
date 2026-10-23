@@ -57,7 +57,7 @@ RUN \
         mosh=1.4.0-r18 \
         mosquitto-clients=2.1.2-r1 \
         mtr=0.96-r2 \
-        nano-syntax=9.2-r0 \
+        nano-syntax=9.3-r0 \
         nano=9.3-r0 \
         ncdu=1.22-r2 \
         ncurses=6.6_p20260516-r0 \
