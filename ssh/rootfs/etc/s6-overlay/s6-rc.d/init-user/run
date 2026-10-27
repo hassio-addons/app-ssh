@@ -4,7 +4,8 @@
 # Home Assistant Community App: Advanced SSH & Web Terminal
 # Executes configured customizations & persists user settings
 # ==============================================================================
-readonly -a DIRECTORIES=(addon_configs addons backup homeassistant media share ssl)
+readonly -a DIRECTORIES=(app_configs backup homeassistant local_apps media share ssl)
+readonly -a DIRECTORIES_LEGACY_MAP=(addons:local_apps addon_configs:app_configs config:homeassistant)
 readonly BASH_HISTORY_FILE=/root/.bash_history
 readonly BASH_HISTORY_PERSISTENT_FILE=/data/.bash_history
 readonly GIT_CONFIG=/data/.gitconfig
@@ -21,11 +22,22 @@ for dir in "${DIRECTORIES[@]}"; do
         || bashio::log.warning "Failed linking common directory: ${dir}"
 done
 
-# Some links to old locations, to not mess with the user's muscle memory
-ln -s "/homeassistant" "/config" \
-    || bashio::log.warning "Failed linking common directory: /config"
-ln -s "/homeassistant" "${HOME}/config" \
-    || bashio::log.warning "Failed linking common directory: ${HOME}/config"
+# Legacy paths: keep the old locations working for backwards compatibility.
+# Enabled unless explicitly turned off, so existing installs that do not
+# have the option stored yet keep working as before.
+if ! bashio::config.false 'legacy_paths'; then
+    for link in "${DIRECTORIES_LEGACY_MAP[@]}"; do
+        old="${link%%:*}"
+        new="${link#*:}"
+
+        ln -s "/${new}" "/${old}" \
+            || bashio::log.warning "Failed linking legacy path: /${old}"
+        ln -s "/${new}" "${HOME}/${old}" \
+            || bashio::log.warning "Failed linking legacy path: ${HOME}/${old}"
+    done
+else
+    bashio::log.notice 'Legacy paths have been disabled!'
+fi
 
 # Sets up the shell history of both ZSH and Bash to be persistent.
 #
