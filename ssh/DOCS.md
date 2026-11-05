@@ -90,6 +90,7 @@ ssh:
   allow_tcp_forwarding: false
 zsh: true
 share_sessions: true
+legacy_paths: true
 packages:
   - build-base
 init_commands:
@@ -213,6 +214,15 @@ This allows you to pick up where you left your terminal from either of those.
 
 This option allows you to disable this behavior by setting it to `false`, which
 effectively sets SSH to behave as it used to be.
+
+#### Option: `legacy_paths`
+
+This option creates symlinks from the legacy paths (`addons/`, `addon_configs/`,
+`config/`) to the new paths matching Home Assistant's documentation and terminology
+(`local_apps/`, `app_configs/`, `homeassistant/`).
+
+This option is enabled by default so existing scripts and habits keep working.
+Set it to `false` to remove the legacy symlinks.
 
 #### Option: `packages`
 
