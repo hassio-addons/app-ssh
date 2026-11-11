@@ -43,7 +43,7 @@ RUN \
         docker-bash-completion=29.9.3-r0 \
         docker-zsh-completion=29.9.3-r0 \
         gcompat=1.1.0-r4 \
-        git=2.54.0-r0 \
+        git=2.54.1-r0 \
         htop=3.5.3-r0 \
         iproute2=7.0.0-r0 \
         json-c=0.18-r1 \
