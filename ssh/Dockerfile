@@ -52,7 +52,7 @@ RUN \
         libuv=1.52.1-r0 \
         libxml2-utils=2.13.9-r3 \
         lsblk=2.42.3-r1 \
-        mariadb-client=11.8.9-r0 \
+        mariadb-client=11.8.10-r0 \
         mc=4.8.33-r3 \
         mosh=1.4.0-r18 \
         mosquitto-clients=2.1.2-r1 \
