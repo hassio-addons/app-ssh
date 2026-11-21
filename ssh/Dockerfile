@@ -69,7 +69,7 @@ RUN \
         procps-ng=4.0.6-r0 \
         pwgen=2.08-r3 \
         pulseaudio-utils=17.0-r7 \
-        py3-pip=26.1.2-r0 \
+        py3-pip=26.1.2-r1 \
         python3=3.14.10-r1 \
         rsync=3.5.2-r1 \
         screen=5.0.2-r0 \
