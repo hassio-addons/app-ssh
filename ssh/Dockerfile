@@ -50,7 +50,7 @@ RUN \
         libltdl=2.6.0-r1 \
         libstdc++=15.2.0-r5 \
         libuv=1.52.1-r0 \
-        libxml2-utils=2.13.9-r3 \
+        libxml2-utils=2.13.9-r5 \
         lsblk=2.42.3-r1 \
         mariadb-client=11.8.10-r0 \
         mc=4.8.33-r3 \
